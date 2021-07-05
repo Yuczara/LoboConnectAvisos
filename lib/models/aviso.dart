@@ -25,14 +25,6 @@ class Aviso{
    String usuario;
 
   //Aviso(this.departamento,this.descripcion, this.email, this.exist, this.fechaModificacion, this.fechaParaOrdenar, this.fechaPublicacion, this.titulo, this.usuario);
-
-//  String get key  => _key;
-//  String get date  => _date;
-//  String get title  => _title;
-//  String get body  => _body;
-// String get url  => url;
-
-
   Aviso.fromSnapshot(DataSnapshot snap):
         this.key = snap.key,
         this.departamento = snap.value[DEPARTAMENTO],

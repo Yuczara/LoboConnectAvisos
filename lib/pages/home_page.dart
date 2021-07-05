@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:loboconnectnotif/models/aviso.dart';
+
 import 'package:loboconnectnotif/pages/message_page.dart';
 import 'package:loboconnectnotif/pages/view_notification.dart';
 import 'package:loboconnectnotif/services/push_notification_service.dart';
@@ -50,7 +51,11 @@ class _HomePageState extends State<HomePage> {
               child: Center(
                 child: Container(
                   alignment: Alignment.center,
-                  child: CircularProgressIndicator(),
+                  child: Text(
+                                  "No tienes avisos",
+                                  style: TextStyle(fontSize: 25.0, color: Colors.blueGrey,height:15.0),
+                                ),
+                  //child: CircularProgressIndicator(),
                 ),
               ),
             ),
@@ -58,30 +63,31 @@ class _HomePageState extends State<HomePage> {
             Visibility(
               visible: avisoList.isNotEmpty,
               child: Flexible(
-                  child: FirebaseAnimatedList(
+                  child: FirebaseAnimatedList(                    
                       query: _database.reference().child('avisos_lc'),
-                      itemBuilder: (_, DataSnapshot snap, Animation<double> animation, int index){
+                      //reverse: true,
+                        itemBuilder: (_, DataSnapshot snap, Animation<double> animation, int index){
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Card(
                             child: ListTile(
                               title: ListTile(
                                 onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => AvisoView(avisoList[index])));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => AvisoView(avisoList.reversed.toList()[index])));
                                 },
                                 title: Text(
-                                  avisoList[index].titulo,
+                                  avisoList.reversed.toList()[index].titulo,
                                   style: TextStyle(
                                       fontSize: 22.0, fontWeight: FontWeight.bold),
                                 ),
                                 trailing: Text(
-                                  avisoList[index].fechaPublicacion,
+                                  avisoList.reversed.toList()[index].fechaPublicacion,
                                   style: TextStyle(fontSize: 14.0, color: Colors.grey),
                                 ),
                               ),
                               subtitle: Padding(
                                 padding: const EdgeInsets.only(bottom: 14.0),
-                                child: Text(avisoList[index].descripcion, style: TextStyle(fontSize: 18.0),),
+                                child: Text(avisoList.reversed.toList()[index].descripcion, style: TextStyle(fontSize: 18.0),),
                               ),
                             ),
                           ),
@@ -121,3 +127,6 @@ class _HomePageState extends State<HomePage> {
   }
   
 }
+
+
+//avisoList.reversed.toList()[index]

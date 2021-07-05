@@ -18,33 +18,34 @@ class PushNotificationService{
 //segundo plano
   static Future _backgroundHandler( RemoteMessage message)async{
     print('==============background Handler==============${message.messageId}');
-    _messageStream.add(message.notification?.body?? 'No titulo');
-    print(message.notification?.title?? 'no titulo');
+    _messageStream.add(message.notification?.body?? 'Nuevo Aviso');
+    print(message.notification?.title?? 'Nuevo Aviso');
 
-    titulo= message.notification?.title?? 'no titulo';
-    descripcion= message.notification?.body?? 'no descripcion';
+    titulo= message.notification?.title?? 'Nuevo Aviso';
+    descripcion= message.notification?.body?? 'Revisa tu bandeja de avisos.';
   }
 
   static Future _onMessageHandler( RemoteMessage message)async{
     print('==============onMessageHandler============== ${message.messageId}');
     print(message.data);
-    _messageStream.add(message.notification?.body?? 'No titulo');
-    print(message.notification?.title?? 'no titulo');
+
+    _messageStream.add(message.notification?.body?? 'Nuevo Aviso');
+    print(message.notification?.title?? 'Nuevo Aviso');
     
-    titulo= message.notification?.title?? 'no titulo';
-    descripcion= message.notification?.body?? 'no descripcion';
+    titulo= message.notification?.title?? 'Nuevo Aviso';
+    descripcion= message.notification?.body?? 'Revisa tu bandeja de avisos.';
   }
 
 //app abierta
   static Future _onMessageOpenApp( RemoteMessage message)async{
     print('==============onMessageOpenApp============== ${message.messageId}');
     print(message.data);
-    _messageStream.add(message.notification?.body?? 'No titulo');
-    print(message.notification?.title?? 'no titulo');
+    _messageStream.add(message.notification?.body?? 'Nuevo Aviso');
+    print(message.notification?.title?? 'Nuevo Aviso');
   
   
-    titulo= message.notification?.title?? 'no titulo';
-    descripcion= message.notification?.body?? 'no descripcion';
+    titulo= message.notification?.title?? 'Nuevo Aviso';
+    descripcion= message.notification?.body?? 'Revisa tu bandeja de avisos.';
   }
 
   static Future initializeApp() async{
@@ -59,7 +60,6 @@ class PushNotificationService{
 
     //SUBSCRIPCION A TOPIC
     print('==========================SUBSCRIPCION=============================');
-    print('FlutterFire Messaging Example: Subscribing to topic "TEST".');
     FirebaseMessaging.instance.subscribeToTopic('test');
     messaging.subscribeToTopic("test");
 
@@ -76,4 +76,3 @@ class PushNotificationService{
     }
 
 }
-
